@@ -336,7 +336,7 @@ Sa lahat ng paksa, ang pinaka tumatak sa akin ay ang konsepto ng Market Equilibr
 
 <!-- Back button -->
 <div class="back-button-container">
-  <a href="My Webpage.html" class="back-button">⬅ Back to Home Page</a>
+  <a href="index.html" class="back-button">⬅ Back to Home Page</a>
 </div>
 
 <script>
