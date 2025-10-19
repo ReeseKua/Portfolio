@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ICT 💛</title>
+ <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gap: 1rem;
+      --img-width: 320px;
+    }
+
+    body {
+      font-family: 'Lora', serif;
+      color: #1e3a8a;
+      padding: 24px;
+      line-height: 1.6;
+      max-width: 980px;
+      margin: 0 auto;
+      background-image: url("hearts.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Lora', cursive;
+      font-size: 58px;
+      color: #1e3a8a;
+      text-shadow: 2px 2px #ffeb3b;
+      margin-bottom: 30px;
+      margin-top: 10px;
+      animation: bounceTitle 3s infinite ease-in-out;
+    }
+
+    @keyframes bounceTitle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .card {
+      display: flex;
+      gap: var(--gap);
+      align-items: flex-start;
+      background: linear-gradient(180deg, #fffde7, #fff9c4);
+      padding: 24px;
+      border-radius: 30px 80px 30px 80px;
+      border: 6px solid #1e3a8a;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      margin-bottom: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .card img,
+    .card video {
+      width: var(--img-width);
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      flex: 0 0 var(--img-width);
+      border: 3px solid #1e3a8a;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .card img:hover,
+    .card video:hover {
+      transform: scale(1.15);
+    }
+
+    .media {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 0 0 var(--img-width);
+    }
+
+    .card .text {
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  color: #1e3a8a;
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+  font-family: 'Lora', serif;
+  font-size: 36px;
+  color: #0d47a1;
+  text-shadow: 1px 1px #ffeb3b;
+}
+
+
+    .card ul {
+      margin: 10px 0 10px 20px;
+      padding: 0;
+    }
+
+    .card li {
+      list-style-type: "💛 ";
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .card img,
+      .card video {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+      }
+    }
+
+    /* Back button */
+    .back-button-container { text-align: center; margin: 2rem 0; }
+    .back-button {
+      display: inline-block;
+      background-color: #1e3a8a;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .back-button:hover { background-color: #0d47a1; transform: scale(1.05); }
+
+    /* Floating bananas */
+    .banana {
+      position: fixed;
+      font-size: 40px;
+      animation: float 8s linear infinite;
+      opacity: 0.8;
+      z-index: 0;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+    }
+    .banana:nth-child(1){ left:10%; animation-delay:0s;}
+    .banana:nth-child(2){ left:30%; animation-delay:2s;}
+    .banana:nth-child(3){ left:60%; animation-delay:4s;}
+    .banana:nth-child(4){ left:80%; animation-delay:1s;}
+
+    /* Side bouncing minions */
+    .minion-left, .minion-right {
+      position: fixed;
+      bottom: 10px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .minion-left { left: 10px; }
+    .minion-right { right: 10px; }
+    .minion {
+      width: 60px;
+      height: 80px;
+      background: #ffeb3b;
+      border: 4px solid #1e3a8a;
+      border-radius: 30px 30px 20px 20px;
+      position: relative;
+      animation: bounce 2s infinite ease-in-out;
+    }
+    .minion-left .minion { animation-delay: 0s; }
+    .minion-right .minion { animation-delay: 0.5s; }
+
+    .minion-eye {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 3px solid #444;
+      border-radius: 50%;
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .minion-eye::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .pants {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 25px;
+      background: #1565c0;
+      border-top: 3px solid #0d47a1;
+      border-radius: 0 0 20px 20px;
+    }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  </style>
+</head>
+<body>
+
+  <!-- Floating bananas -->
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+
+  <h1>💛 ICT LESSONS 💛</h1>
+
+  <!-- LESSONS 1–6 with what I learned -->
+  <div class="card">
+    <img src="lesson 1.png" alt="Lesson 1">
+    <div class="text">
+      <h2>Lesson 1: CSS Basics</h2>
+      <p>CSS controls the style and layout of web pages. I learned to set background colors, text fonts, and align content properly.</p>
+      <p><b>What I learned:</b> I can now change the appearance of a webpage and make it visually appealing.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="lesson 2.png" alt="Lesson 2">
+    <div class="text">
+      <h2>Lesson 2: Style Sheets</h2>
+      <p>Learned inline, internal, and external CSS. Using different types helps manage website styling efficiently.</p>
+      <p><b>What I learned:</b> I understand the difference between inline, internal, and external CSS and when to use each.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="lesson 3.png" alt="Lesson 3">
+    <div class="text">
+      <h2>Lesson 3: Display Property & Span/Div</h2>
+      <p>Used block and inline elements, learned div for sections and span for inline text. Helps organize layout.</p>
+      <p><b>What I learned:</b> I can control the placement of elements using block and inline, and use div/span effectively.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="lesson 4.png" alt="Lesson 4">
+    <div class="text">
+      <h2>Lesson 4: CSS Rule & Class Selector</h2>
+      <p>Learned how to structure rules and use classes for reusable styling. Grouping selectors improves code efficiency.</p>
+      <p><b>What I learned:</b> I can create reusable styles for multiple elements using classes and make my CSS cleaner.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="lesson 5.png" alt="Lesson 5">
+    <div class="text">
+      <h2>Lesson 5: CSS Selectors</h2>
+      <p>Studied element, class, ID, universal, group, and attribute selectors. Helps target elements precisely for styling.</p>
+      <p><b>What I learned:</b> I can select specific elements efficiently to apply consistent styling across the page.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="lesson 6.png" alt="Lesson 6">
+    <div class="text">
+      <h2>Lesson 6: Dimensions & Pseudo-Classes</h2>
+      <p>Controlled size, visibility, and added hover effects. Pseudo-classes make web pages more interactive and dynamic.</p>
+      <p><b>What I learned:</b> I can adjust element size, visibility, and make links and buttons interactive for better UX.</p>
+    </div>
+  </div>
+
+  <!-- SCHOOL EVENTS -->
+  <h1>My School Events</h1>
+
+  <!-- Buwan ng Wika -->
+  <div class="card">
+    <div class="media">
+      <img src="buwan1.jpg" alt="Buwan ng Wika Image 1">
+      <img src="buwan2.jpg" alt="Buwan ng Wika Image 2">
+      <video src="buwan3.mp4" controls></video>
+    </div>
+    <div class="text">
+      <h2>Buwan ng Wika</h2>
+      <p>During the Buwan ng Wika celebration, I learned the importance of our language in expressing our culture, traditions, and identity as Filipinos. I can apply this in real life by actively using Filipino in conversations, school projects, and by showing respect for our cultural heritage. I participated actively in the event by attending competitions, watching presentations, and engaging in school programs. If I were to teach this topic to a classmate, I would explain that language is not just a tool for communication but also a way to preserve and understand our culture. This event is important because it inspires students to appreciate and take pride in their own language and identity as Filipinos.</p>
+    </div>
+  </div>
+
+  <!-- Intrams -->
+  <div class="card">
+    <div class="media">
+      <img src="intrams1.jpg" alt="Intrams Image 1">
+      <img src="intrams2.jpg" alt="Intrams Image 2">
+      <video src="intrams3.mp4" controls></video>
+    </div>
+    <div class="text">
+      <h2>Intrams</h2>
+      <p>During Intramurals, I learned the value of sportsmanship, teamwork, and discipline in athletic activities. I can apply this in real life by cooperating with others, accepting both wins and losses gracefully, and maintaining a healthy and active lifestyle. I actively participated by joining games, cheering for classmates, and helping with preparations. If I were to teach this to a classmate, I would explain that Intrams is not just about winning but also about teamwork, respect, and having fun. This event is important because it strengthens student relationships, teaches discipline, and brings energy and excitement to the school community.</p>
+    </div>
+  </div>
+
+  <!-- Science -->
+  <div class="card">
+    <div class="media">
+      <img src="science1.jpg" alt="Science Image 1">
+      <img src="science2.jpg" alt="Science Image 2">
+      <video src="science3.mp4" controls></video>
+    </div>
+    <div class="text">
+      <h2>Science Month</h2>
+      <p>During the Science event, I realized how important science is in explaining phenomena around us and advancing technology. I can apply what I learned by observing carefully, conducting experiments, and using the scientific method to understand the world. I actively participated by joining experiments, quizzes, and demonstrations. If I were to teach this to a classmate, I would use simple experiments and practical examples to show how science is applied in everyday life. Science events are important because they expand knowledge, develop critical thinking, and teach students to find solutions to real-world problems.</p>
+    <p> credits to: Standard press </p>
+</div>
+  </div>
+
+  <!-- AP -->
+  <div class="card">
+    <div class="media">
+      <img src="ap1.jpg" alt="AP Image 1">
+      <img src="ap2.jpg" alt="AP Image 2">
+      <video src="ap3.mp4" controls></video>
+    </div>
+    <div class="text">
+      <h2>Araling Panlipunan</h2>
+      <p>In the AP event, I learned how understanding history, society, and economics helps us make sense of what is happening around us. I can apply this knowledge in daily life by being more aware of social issues, making informed decisions, and participating in activities that benefit the community. I actively engaged in the event by listening to discussions, joining group activities, and working on projects. If I were to teach this to a classmate, I would use real-life examples to show how AP concepts relate to everyday life. This event is important because it teaches students to be responsible citizens and knowledgeable about society.</p>
+    <p> credits to: Standard press </p>
+</div>
+  </div>
+
+  <!-- Teacher's Day -->
+  <div class="card">
+    <div class="media">
+      <img src="teacher1.jpg" alt="Teacher's Day Image 1">
+      <img src="teacher2.jpg" alt="Teacher's Day Image 2">
+      <video src="teacher3.mp4" controls></video>
+    </div>
+    <div class="text">
+      <h2>Teacher's Day</h2>
+      <p>On Teacher’s Day, I learned the importance of showing appreciation and gratitude to teachers who guide and educate us every day. I can apply this by showing respect, working hard in my studies, and expressing thanks to teachers in small ways. I actively participated by joining programs, giving messages of appreciation, and helping with presentations. If I were to teach this topic to a classmate, I would explain that Teacher’s Day is a chance to honor those who dedicate their time and knowledge to shaping our future. This event is important because it reminds us of the vital role teachers play in our growth and motivates a positive learning environment.</p>
+    </div>
+  </div>
+
+  <!-- Back button -->
+  <div class="back-button-container">
+    <a href="My Webpage.html" class="back-button">⬅ Back to Home Page</a>
+  </div>
+
+  <!-- Side bouncing minions -->
+  <div class="minion-left">
+    <div class="minion"><div class="minion-eye"></div><div class="pants"></div></div>
+  </div>
+  <div class="minion-right">
+    <div class="minion"><div class="minion-eye"></div><div class="pants"></div></div>
+  </div>
+
+</body>
+</html>
+
+
