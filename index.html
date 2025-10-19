@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reese's Minion Gallery!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: url('cloud.webp');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Lora', serif;
+      overflow: hidden;
+    }
+
+ 
+
+    /* Main yellow box */
+    .minion-box {
+      background: linear-gradient(180deg, #ffeb3b, #fff176);
+      padding: 60px;
+      text-align: center;
+      border-radius: 80px 20px 80px 20px;
+      border: 8px solid #1e3a8a;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      color: #1e3a8a;
+      max-width: 800px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 2;
+    }
+
+    .minion-box:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+      font-size: 58px;
+      margin-bottom: 20px;
+    }
+
+    .links {
+      margin-top: 20px;
+    }
+
+    a {
+      color: #0d47a1;
+      background: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 32px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: 3px solid #0d47a1;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    a:hover {
+      background-color: #0d47a1;
+      color: #ffeb3b;
+      transform: scale(1.1);
+    }
+
+    .eye {
+      width: 70px;
+      height: 70px;
+      background: white;
+      border: 6px solid #444;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .eye::after {
+      content: "";
+      width: 25px;
+      height: 25px;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Bouncing minions at bottom */
+    .minions {
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      z-index: 1;
+    }
+
+    .minion {
+      width: 80px;
+      height: 100px;
+      background: #ffeb3b;
+      border: 4px solid #1e3a8a;
+      border-radius: 40px 40px 30px 30px;
+      position: relative;
+      animation: bounce 2s infinite ease-in-out;
+    }
+
+    .minion:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .minion:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .minion-eye {
+      width: 25px;
+      height: 25px;
+      background: white;
+      border: 3px solid #444;
+      border-radius: 50%;
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .minion-eye::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pants {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 35px;
+      background: #1565c0;
+      border-top: 3px solid #0d47a1;
+      border-radius: 0 0 30px 30px;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-30px);
+      }
+    }
+
+    /* Floating bananas */
+    .banana {
+      position: absolute;
+      font-size: 40px;
+      animation: float 8s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .banana:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .banana:nth-child(2) { left: 25%; animation-delay: 2s; }
+    .banana:nth-child(3) { left: 50%; animation-delay: 4s; }
+    .banana:nth-child(4) { left: 75%; animation-delay: 1s; }
+    .banana:nth-child(5) { left: 90%; animation-delay: 3s; }
+
+    /* Extra small minion stickers around */
+    .sticker {
+      position: absolute;
+      width: 60px;
+      height: 75px;
+      background: #ffeb3b;
+      border: 3px solid #1e3a8a;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1e3a8a;
+      font-size: 30px;
+      font-weight: bold;
+      transform: rotate(-10deg);
+    }
+
+    .sticker .eye {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 0;
+    }
+
+    .sticker1 { top: 40px; left: 60px; transform: rotate(-15deg); }
+    .sticker2 { top: 80px; right: 80px; transform: rotate(10deg); }
+    .sticker3 { bottom: 200px; left: 80px; transform: rotate(8deg); }
+    .sticker4 { bottom: 220px; right: 90px; transform: rotate(-8deg); }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Bananas -->
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+
+  <!-- Minion Stickers -->
+  <div class="sticker sticker1"><div class="eye"></div></div>
+  <div class="sticker sticker2"><div class="eye"></div></div>
+  <div class="sticker sticker3"><div class="eye"></div></div>
+  <div class="sticker sticker4"><div class="eye"></div></div>
+
+  <!-- Main Content Box -->
+  <div class="minion-box">
+    <div class="eye"></div>
+    <h1>Reese’s Minion Gallery! 💛</h1>
+    <div class="links">
+      <a href="My Personal Space.html">My Personal Space</a> |
+      <a href="ICT.html">ICT</a> |
+      <a href="AP.html">AP</a>
+    </div>
+  </div>
+
+  <!-- Bouncing Minions -->
+  <div class="minions">
+    <div class="minion">
+      <div class="minion-eye"></div>
+      <div class="pants"></div>
+    </div>
+    <div class="minion">
+      <div class="minion-eye"></div>
+      <div class="pants"></div>
+    </div>
+    <div class="minion">
+      <div class="minion-eye"></div>
+      <div class="pants"></div>
+    </div>
+  </div>
+
+</body>
+</html>
