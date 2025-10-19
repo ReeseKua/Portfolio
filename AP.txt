@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AP Economics Lessons</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --gap: 1rem; --img-width: 320px; }
+    body {
+      font-family: 'Lora', serif;
+      color: #1e3a8a;
+      line-height: 1.5;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+      background-image: url("hearts.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+    h1 {
+      text-align: center;
+      font-family: 'Lora', cursive;
+      font-size: 48px;
+      color: #1e3a8a;
+      text-shadow: 2px 2px #ffeb3b;
+      margin-bottom: 30px;
+      margin-top: 10px;
+    }
+ /* Side bouncing minions */
+    .minion-left, .minion-right {
+      position: fixed;
+      bottom: 10px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .minion-left { left: 10px; }
+    .minion-right { right: 10px; }
+    .minion {
+      width: 60px;
+      height: 80px;
+      background: #ffeb3b;
+      border: 4px solid #1e3a8a;
+      border-radius: 30px 30px 20px 20px;
+      position: relative;
+      animation: bounce 2s infinite ease-in-out;
+    }
+    .minion-left .minion { animation-delay: 0s; }
+    .minion-right .minion { animation-delay: 0.5s; }
+
+    .minion-eye {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 3px solid #444;
+      border-radius: 50%;
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .minion-eye::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+.pants {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 25px;
+      background: #1565c0;
+      border-top: 3px solid #0d47a1;
+      border-radius: 0 0 20px 20px;
+    }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    /* Cards */
+    .card {
+      display: flex;
+      gap: var(--gap);
+      align-items: flex-start;
+      background: linear-gradient(180deg, #fffde7, #fff9c4);
+      padding: 24px;
+      border-radius: 30px 80px 30px 80px;
+      border: 6px solid #1e3a8a;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      margin-bottom: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover { transform: scale(1.03); box-shadow: 0 12px 25px rgba(0,0,0,0.25); }
+    .card img, .card video {
+      width: var(--img-width);
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      flex: 0 0 var(--img-width);
+      border: 3px solid #1e3a8a;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .card img:hover, .card video:hover { transform: scale(1.15); }
+    .media { display: flex; flex-direction: column; gap: 10px; flex: 0 0 var(--img-width); }
+    .card .text { flex: 1 1 auto; font-family: 'Lora', cursive; font-size: 20px; color: #1e3a8a; }
+    .card h2 { margin-top:0; margin-bottom:0.25rem; font-family:'Lora',cursive; font-size:32px; color:#0d47a1; text-shadow:1px 1px #ffeb3b;}
+    .card ul { margin:10px 0 10px 20px; padding:0; }
+    .card li { list-style-type:"💛 "; margin-bottom:4px; }
+    @media (max-width: 640px) {
+      .card { flex-direction: column; align-items: stretch; }
+      .card img, .card video { width:100%; max-width:100%; flex:none; }
+    }
+
+    /* Calculator */
+    .calculator { text-align:center; background-color:#fffbea; border:2px solid #ffd95a; border-radius:12px; padding:20px; margin-top:20px; }
+    .calculator input { padding:8px; width:60%; border-radius:8px; border:1px solid #ccc; font-size:1rem; }
+    .calculator button { background-color:#004080; color:white; border:none; padding:10px 16px; border-radius:25px; font-size:1rem; cursor:pointer; transition:0.3s ease; margin-left:10px; }
+    .calculator button:hover { background-color:#0066cc; transform:scale(1.05); }
+    .result-box { margin-top:1rem; font-weight:bold; color:#333; background-color:#fff4cc; padding:12px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.05);}
+
+    /* Back Button */
+    .back-button-container { text-align:center; margin-top:2rem; margin-bottom:1rem; }
+    .back-button { display:inline-block; background-color:#004080; color:#fff; text-decoration:none; padding:10px 25px; border-radius:25px; font-weight:bold; transition: transform 0.3s ease, background-color 0.3s ease; }
+    .back-button:hover { background-color:#0066cc; transform:scale(1.05); }
+
+    /* Floating bananas */
+    .banana { position:fixed; font-size:40px; animation:float 8s linear infinite; opacity:0.8; z-index:0; }
+    @keyframes float { 0%{transform:translateY(100vh) rotate(0deg);opacity:0.8;} 100%{transform:translateY(-120vh) rotate(360deg);opacity:0;} }
+    .banana:nth-child(1){ left:10%; animation-delay:0s; } .banana:nth-child(2){ left:30%; animation-delay:2s; } .banana:nth-child(3){ left:60%; animation-delay:4s; } .banana:nth-child(4){ left:80%; animation-delay:1s; }
+
+    /* Interactive Definition Cards */
+    .definition-card { background-color:#fffde7; border:2px solid #ffd95a; border-radius:12px; padding:12px; margin-top:10px; cursor:pointer; transition:transform 0.3s ease,box-shadow 0.3s ease; }
+    .definition-card:hover { transform:scale(1.02); box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+    .definition-card summary { font-weight:bold; font-size:1.1rem; outline:none; }
+    .definition-card[open] { background-color:#fff9c4; }
+  </style>
+</head>
+<body>
+
+  <!-- Floating bananas -->
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+  <div class="banana">🍌</div>
+
+  <h1>AP ECONOMICS LESSONS 💛</h1>
+
+  <!-- LESSON 1: DEMAND -->
+  <div class="card">
+    <div class="media">
+      <img src="demand1.png" alt="Demand Image 1">
+      <img src="demand2.png" alt="Demand Image 2">
+    </div>
+    <div class="text">
+      <h2>Lesson 1: Demand 💰</h2>
+      <p><strong>Depinisyon ng Demand:</strong> Ang demand ay tumutukoy sa dami ng produkto o serbisyo na gusto at kayang bilhin ng mga mamimili sa isang takdang presyo at panahon.</p>
+      <p><strong>Presyo bilang Determinant:</strong> Ang presyo ang pinakamahalagang nagtatakda sa dami ng demand.</p>
+      <p><strong>Batas ng Demand:</strong> Kapag tumataas ang presyo, bumababa ang dami ng gusto at kayang bilhin; kapag bumababa ang presyo, tumataas.</p>
+      <p><strong>Ceteris Paribus:</strong> Ipinagpapalagay na ang presyo lamang ang salik na nakaapekto sa quantity demanded.</p>
+      <p><strong>Bakit may Inverse na Ugnayan?</strong></p>
+      <ul>
+        <li>Substitution Effect: Kapag tumataas ang presyo, ang mamimili ay hahanap ng pamalit na mas mura.</li>
+        <li>Income Effect: Mas malaki ang halaga ng kinikita kapag mas mababa ang presyo.</li>
+      </ul>
+      <details class="definition-card">
+        <summary>📈 Demand Formula</summary>
+        <p>Demand = Kagustuhan + Kakayahan</p>
+        <p>Demand Function: Qd = a - bP</p>
+        <p>Qd = dami ng demand (Dependent)</p>
+        <p>a = dami ng demand kung ang presyo ay 0</p>
+        <p>-b = slope ng demand function</p>
+        <p>P = presyo</p>
+      </details>
+      <p><strong>Demand Curve:</strong> Isang linya na nagpapakita ng negatibong relasyon ng presyo at dami ng produktong handang bilhin.</p>
+      <p><strong>Mga Salik ng Produkto:</strong> Kita, Populasyon, Panlasa, Presyo, Inaasahan ng mamimili sa presyo sa hinaharap, Okasyon, Panahon/Klima</p>
+
+      <!-- Calculator inserted here -->
+      <div class="calculator">
+        <h3>Market Calculator 🧮</h3>
+        <input type="number" id="priceInput" placeholder="Enter price here">
+        <button id="calcBtn">Calculate</button>
+        <div class="result-box" id="calcResult"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LESSON 2: SUPPLY -->
+  <div class="card">
+    <div class="media">
+      <img src="supply1.png" alt="Supply Image 1">
+      <img src="supply2.png" alt="Supply Image 2">
+    </div>
+    <div class="text">
+      <h2>Lesson 2: Supply 📦</h2>
+      <p><strong>Depinisyon ng Supply:</strong> Ang supply ay dami ng produkto o serbisyo na gustong ibenta ng mga produsyer sa isang takdang presyo at partikular na panahon.</p>
+      <details class="definition-card">
+        <summary>📊 Supply Function</summary>
+        <p>Supply = Pagnanais + Kakayahan</p>
+        <p>Supply function ay nagpapakita ng ugnayan ng presyo at dami ng produkto na handang ipagbili ng prodyuser.</p>
+      </details>
+      <p><strong>Supply Schedule:</strong> Talahanayan ng dami ng produkto na handang ipagbili sa iba’t ibang presyo.</p>
+      <p><strong>Supply Curve:</strong> Grapikong paglalarawan ng ugnayan ng presyo at dami ng produkto.</p>
+      <p><strong>Market Supply:</strong> Kabuuang dami ng produkto na handang ipagbili ng lahat ng prodyuser.</p>
+      <p><strong>Batas ng Supply:</strong> Kapag tumaas ang presyo, tumataas ang dami ng produktong handang ipagbili, kabaliktaran kapag bumaba.</p>
+      <p><strong>Grapikong Pagbabago:</strong> Paggalaw sa kurba (presyo lang) o paglipat ng kurba (iba pang salik tulad ng teknolohiya o gastos sa produksyon).</p>
+      <p><strong>Mga Salik na Nakaaapekto sa Supply:</strong> Teknolohiya, Dami ng Tinda, Subsidy, Gastos sa Produksiyon, Panahon/Klima, Presyo ng Ibang Produkto, Ekspektasyon</p>
+    </div>
+  </div>
+
+  <!-- LESSON 3: PRICE ELASTICITY -->
+  <div class="card">
+    <div class="media">
+      <img src="elasticity1.png" alt="Elasticity Image 1">
+      <img src="elasticity2.png" alt="Elasticity Image 2">
+    </div>
+    <div class="text">
+      <h2>Lesson 3: Price Elasticity ⚖️</h2>
+      <p><strong>Elastisidad:</strong> Para masukat ang pagtugon ng mamimili at nagtitinda sa pagbabago ng presyo.</p>
+      <p><strong>Elastisidad ng Demand (ED):</strong> Porsiyento ng pagtugon ng mamimili sa bawat porsiyento ng pagbabago ng presyo.</p>
+      <p><strong>Elastisidad ng Supply (ES):</strong> Porsiyento ng pagtugon ng nagtitinda sa bawat porsiyento ng pagbabago ng presyo.</p>
+      <p><strong>Uri ng Elastisidad:</strong></p>
+      <ul>
+        <li>Elastik: E > 1, malaki ang pagtugon, produktong may maraming pamalit.</li>
+        <li>Di-Elastik: E < 1, maliit ang pagtugon, pangunahing pangangailangan tulad ng gamot.</li>
+        <li>Unitary: E = 1, parehong bahagdan ng pagbabago sa presyo at quantity demanded.</li>
+        <li>Ganap na Elastik (Perfectly Elastic): E → ∞, kahit maliit na pagbabago sa presyo, malaking pagbabago sa quantity.</li>
+        <li>Ganap na Di-Elastik (Perfectly Inelastic): E = 0, quantity hindi tumutugon sa presyo, hal. bigas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LESSON 4: MARKET EQUILIBRIUM -->
+  <div class="card">
+    <div class="media">
+      <img src="equilibrium1.png" alt="Equilibrium Image 1">
+      <img src="equilibrium2.png" alt="Equilibrium Image 2">
+    </div>
+    <div class="text">
+      <h2>Lesson 4: Market Equilibrium ⚖️</h2>
+      <p><strong>Equilibrium:</strong> Kalagayan na walang gustong baguhin ang presyo at dami ng produkto sa merkado.</p>
+      <p><strong>Law of Supply and Demand:</strong> If price ↑ → Supply ↑, Demand ↓ | If price ↓ → Supply ↓, Demand ↑</p>
+      <p><strong>Mga Kaganapan sa Pagbabago sa Pamilihan:</strong></p>
+      <ul>
+        <li>Paglipat ng supply curve pakanan/walang pagbabago sa demand</li>
+        <li>Paglipat ng supply curve pakaliwa/walang pagbabago sa demand</li>
+        <li>Paglipat ng demand curve pakanan/walang pagbabago sa supply</li>
+        <li>Paglipat ng demand curve pakaliwa/walang pagbabago sa supply</li>
+        <li>Parehas paglipat ng demand at supply pakanan/pakaliwa at iba't ibang magnitude</li>
+        <li>Walang pagbabago sa demand at supply</li>
+      </ul>
+      <p><strong>Disequilibrium:</strong> Kapag sobra o kulang ang supply kumpara sa demand → pressure sa presyo.</p>
+    </div>
+  </div>
+
+ <!-- LESSON 5: Iba't Ibang Estruktura ng Pamilihan -->
+<div class="card">
+  <div class="media">
+    <img src="intervention1.png" alt="Intervention Image 1">
+    <img src="intervention2.png" alt="Intervention Image 2">
+  </div>
+  <div class="text">
+    <h2>Lesson 5: Iba't Ibang Estruktura ng Pamilihan 🏛️</h2>
+
+    <p><strong>Mga Estruktura ng Pamilihan:</strong> Mula sa ideya ng kompetisyon ay nagkaroon ng iba’t ibang estruktura ng pamilihan.</p>
+    <p>Sa ilalim ng di-ganap na kompetisyon ay napapabilang ang monopoly, monopolistikong kompetisyon, oligopoly, at monopsonyo.</p>
+
+    <h3>Ganap na Kompetisyon</h3>
+    <p>Malaya ang pamilihan sa ilalim ng estrukturang ito sapagkat dito ay walang kontrol ang pamahalaan. Isang halimbawa ng kontrol ay ang paglalagay ng price ceiling.</p>
+    <ul>
+      <li>Marami ang mamimili at nagbebenta</li>
+      <li>Ang mga produktong binebenta ay magkakatulad</li>
+      <li>May ganap na kaalaman ang mamimili at nagbebenta sa kalagayan ng pamilihan</li>
+      <li>Malaya ang paggalaw ng mga salik ng produksyon</li>
+      <li>Malaya ang kalakalan sa industriya</li>
+    </ul>
+
+    <h3>Di-Ganap na Kompetisyon</h3>
+    <p>Mas madaling matamo ang di-ganap na kompetisyon kaysa ganap na kompetisyon dahil mahirap tuparin ang mga kondisyon ng ganap na kompetisyon.</p>
+
+    <h4>Monopoly</h4>
+    <p>Ang monopoly ay paggawa ng isang produkto o serbisyong walang kauri at walang maaaring kumalaban.</p>
+
+    <h4>Monopolistikong Kompetisyon</h4>
+    <p>Ito ay estruktura ng pamilihan na may mga elemento ng ganap na kompetisyon at monopoly. Maraming mamimili at nagbebenta ng magkakatulad ngunit may pagkakaibang produkto batay sa brand name.</p>
+  </div>
+</div>
+
+<!-- LESSON 6: Pagkontrol ng Presyo ng Pamahalaan -->
+<div class="card">
+  <div class="media">
+    <img src="macro1.png" alt="Macro Image 1">
+    <img src="macro2.png" alt="Macro Image 2">
+  </div>
+  <div class="text">
+    <h2>Lesson 6: Pagkontrol ng Presyo ng Pamahalaan 🌐</h2>
+
+    <p><strong>Ang Pagkontrol ng Presyo ng Pamahalaan:</strong> Ang pagtatalaga ng pamahalaan ng pinakamababa at pinakamataas na presyong maaaring itakda sa mga produkto at serbisyo.</p>
+
+    <h3>Republic Act 7581</h3>
+    <p>Kilala ito bilang Price Control Act na may layuning maisagawa ng pamahalaan ang pagkontrol sa presyo ng mga bilihin.</p>
+
+    <h3>National Price Coordination Council</h3>
+    <p>Ito ay may layunin na mabantayan ang mga presyo ng mga produkto upang mapigilan ang paggalaw nito sa pamamagitan ng price ceiling at pamahalaan.</p>
+
+    <h3>Price Ceiling</h3>
+    <p>Pinakamataas na presyong itinakda ng pamahalaan upang ipagbili ang mga produkto.</p>
+    <ul>
+      <li>Nagsisilbing proteksyon ng mamimili laban sa mga mapagsamantalang negosyante.</li>
+      <li>Itinatakda ito sa mas mababang antas kaysa sa equilibrium price na umiiral sa pamilihan.</li>
+    </ul>
+
+    <h3>Price Support / Floor Price</h3>
+    <p>Isinasagawa ito ng pamahalaan upang tulungan at bigyang proteksyon ang mga prodyuser upang mabayaran ang mga gastos sa produksyon.</p>
+    <p>Floor Price: Pinakamababang presyong itinakda ng pamahalaan upang ipagbili ang mga produkto.</p>
+  </div>
+</div>
+
+<!-- Reflection Card -->
+<div class="card">
+  <div class="text">
+    <h2>Repleksyon 📝</h2>
+    <p>Sa kabuuan ng mga araling tinalakay, mas naging malinaw sa akin kung paano gumagana ang pamilihan at kung paano nagkakaugnay ang presyo, demand, at supply upang maabot ang tinatawag na market equilibrium. Natutunan ko na ang presyo ay hindi lamang simpleng numero—ito ay may direktang epekto sa dami ng produktong handang bilhin ng mamimili at handang ipagbili ng prodyuser. Sa pamamagitan ng pagsusuri ng demand at supply, naunawaan ko rin ang kahalagahan ng balanse sa merkado upang maiwasan ang kakulangan o labis na produkto.
+
+Bukod dito, natutunan ko rin ang mahalagang papel ng pamahalaan sa pagpapanatili ng patas na kalakalan, partikular sa pamamagitan ng pagtatakda ng price ceiling at price floor. Ang mga hakbang na ito ay naglalayong protektahan ang parehong mamimili at prodyuser at panatilihin ang kaayusan sa pamilihan.
+
+Sa lahat ng paksa, ang pinaka tumatak sa akin ay ang konsepto ng Market Equilibrium, dahil dito ko naunawaan kung paano ang simpleng pagbabago sa presyo, demand, o supply ay maaaring magkaroon ng malaking epekto sa buong ekonomiya. Ipinapakita nito na ang maayos na ugnayan sa pagitan ng mamimili at prodyuser ay napakahalaga hindi lamang sa pagpapanatili ng balanse sa merkado kundi pati na rin sa pagtiyak ng maayos na daloy ng kalakalan at ekonomiyang matatag.</p>
+  </div>
+</div>
+
+<!-- Back button -->
+<div class="back-button-container">
+  <a href="My Webpage.html" class="back-button">⬅ Back to Home Page</a>
+</div>
+
+<script>
+document.getElementById("calcBtn").addEventListener("click", function() {
+  const price = parseFloat(document.getElementById("priceInput").value);
+  if (isNaN(price) || price <= 0) {
+    document.getElementById("calcResult").innerHTML = "⚠️ Please enter a valid price!";
+    return;
+  }
+
+  const demand = 100 - 5 * price; // Example demand function
+  const supply = 20 + 4 * price;  // Example supply function
+
+  let result = `💰 Price: ${price}<br>📉 Demand: ${demand}<br>📦 Supply: ${supply}<br>`;
+
+  if (demand > supply) result += "➡️ May shortage sa merkado!";
+  else if (supply > demand) result += "⬅️ May surplus sa merkado!";
+  else result += "⚖️ Market Equilibrium!";
+
+  document.getElementById("calcResult").innerHTML = result;
+});
+</script>
+
+
+ <!-- Side bouncing minions -->
+  <div class="minion-left">
+    <div class="minion"><div class="minion-eye"></div><div class="pants"></div></div>
+  </div>
+  <div class="minion-right">
+    <div class="minion"><div class="minion-eye"></div><div class="pants"></div></div>
+  </div>
+
+</body>
+</html>
